@@ -12,7 +12,6 @@ public class UserEntity {
     private int id;
     private String nickname;
     private String password;
-    private Collection<NewsEntity> newssById;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -66,12 +65,4 @@ public class UserEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<NewsEntity> getNewssById() {
-        return newssById;
-    }
-
-    public void setNewssById(Collection<NewsEntity> newssById) {
-        this.newssById = newssById;
-    }
 }
