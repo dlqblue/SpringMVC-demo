@@ -1,5 +1,7 @@
 package com.dlqblue.model;
 
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -88,4 +90,9 @@ public class NewsEntity {
     public void setUserByUserId(UserEntity userByUserId) {
         this.userByUserId = userByUserId;
     }
+
+    public String toString(){
+        return "id:" + getId() + "title:" + getTitle();
+    }
+
 }

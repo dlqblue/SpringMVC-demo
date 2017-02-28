@@ -5,15 +5,9 @@ import com.dlqblue.model.UserEntity;
 import com.dlqblue.repository.NewsRepository;
 import com.dlqblue.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -80,7 +74,7 @@ public class NewsController {
     }
 
     //修改新闻内容，POST请求
-    @RequestMapping(value = "admin/news/updateP", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/news/updateP", method = RequestMethod.POST)
     public String updateNewsP(@ModelAttribute("newsP") NewsEntity newsEntity) {
         newsRepository.updateNews(newsEntity.getTitle(), newsEntity.getUserByUserId().getId(),
                 newsEntity.getContent(), newsEntity.getPushDate(), newsEntity.getId());
@@ -95,6 +89,5 @@ public class NewsController {
         newsRepository.flush();
         return "redirect:/admin/news";
     }
-
 
 }
