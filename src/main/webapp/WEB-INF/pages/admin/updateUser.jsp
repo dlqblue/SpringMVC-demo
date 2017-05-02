@@ -38,6 +38,11 @@
                    value="${user.nickname}"/>
         </div>
         <div class="form-group">
+            <label for="email">邮箱：</label>
+            <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱："
+                   value="${user.email}"/>
+        </div>
+        <div class="form-group">
             <label for="password">密码：</label>
             <input type="text" class="form-control" id="password" name="password" placeholder="请输入密码："
                    value="${user.password}"/>

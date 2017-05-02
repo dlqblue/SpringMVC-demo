@@ -15,6 +15,11 @@
     <!-- 开启注解 -->
     <mvc:annotation-driven/>
 
+    <!--<mvc:resources location="/page/"  mapping="/page/**"/>-->
+    <mvc:resources location="/css/"  mapping="/css/**"/>
+    <mvc:resources location="/img/"  mapping="/img/**"/>
+    <mvc:resources location="/js/"  mapping="/js/**"/>
+
     <!-- 视图解析器，用于支持Servlet JSP的视图解析 -->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>

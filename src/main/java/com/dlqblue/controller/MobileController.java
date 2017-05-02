@@ -27,10 +27,15 @@ public class MobileController {
 //        return json;
 //    }
 
+    // 根据id获取news
     @ResponseBody
     @RequestMapping(value = "/admin/news/get/{id}", method = RequestMethod.GET)
     public String getNews(@PathVariable("id") int id) throws IOException {
-        return JsonMapper.nonDefaultMapper().
-                toJson(newsRepository.findOne(id));
+        NewsEntity newsEntity = newsRepository.findOne(id);
+        // 去掉密码
+        newsEntity.getUserByUserId().setPassword("******");
+        return JsonMapper
+                .nonDefaultMapper()
+                .toJson(newsEntity);
     }
 }

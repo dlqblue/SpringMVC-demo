@@ -12,6 +12,7 @@ public class UserEntity {
     private int id;
     private String nickname;
     private String password;
+    private String email;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -43,6 +44,16 @@ public class UserEntity {
         this.password = password;
     }
 
+    @Basic
+    @Column(name = "email", nullable = false, length = 255)
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,6 +64,7 @@ public class UserEntity {
         if (id != that.id) return false;
         if (nickname != null ? !nickname.equals(that.nickname) : that.nickname != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
 
         return true;
     }
@@ -62,6 +74,7 @@ public class UserEntity {
         int result = id;
         result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
 

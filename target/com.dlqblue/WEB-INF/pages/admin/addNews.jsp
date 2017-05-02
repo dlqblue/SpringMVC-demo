@@ -19,12 +19,17 @@
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="http://mindmup.s3.amazonaws.com/lib/img/favicon.ico" >
+    <link rel="stylesheet" type="text/css" href="/css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-wysihtml5.css">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet" type="text/css">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet" type="text/css">
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
@@ -46,7 +51,7 @@
         </div>
         <div class="form-group">
             <label for="content">内容：</label>
-            <textarea class="form-control" id="content" name="content" rows="3" placeholder="请输入内容："></textarea>
+            <textarea class="form-control" id="content" name="content" placeholder="请输入内容：" rows="10"></textarea>
         </div>
         <div class="form-group">
             <label for="pushDate">日期：</label>
@@ -58,10 +63,19 @@
     </form:form>
 </div>
 
+<script src="/js/wysihtml5-0.3.0.js"></script>
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="/js/prettify.js"></script>
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="/js/bootstrap-wysihtml5.js"></script>
+
+<script>
+    $('#content').wysihtml5();
+</script>
+
 </body>
 </html>

@@ -38,14 +38,14 @@ public class MainController {
         modelMap.addAttribute("userList", userEntityList);
 
         //返回pages目录下的admin/users.jsp页面
-        return "admin/users";
+        return "/admin/users";
     }
 
     // get请求，访问添加用户界面
     @RequestMapping(value = "/admin/users/add", method = RequestMethod.GET)
     public String addUser() {
         //转到addUser界面
-        return "admin/addUser";
+        return "/admin/addUser";
     }
 
     //post请求，处理添加用户请求，并重定向到用户管理界面
@@ -61,7 +61,7 @@ public class MainController {
         userRepository.saveAndFlush(userEntity);
 
         //重定向到用户管理界面，方法为 redirect:url
-        return "redirect:/admin/users";
+        return "redirect:admin/users";
     }
 
     // 更新用户信息
@@ -73,16 +73,16 @@ public class MainController {
 
         // 传递给请求页面
         modelMap.addAttribute("user", userEntity);
-        return "admin/updateUser";
+        return "/admin/updateUser";
     }
 
     // 更新用户信息，操作
     @RequestMapping(value = "/admin/users/updateP", method = RequestMethod.POST)
     public String updateUserPost(@ModelAttribute("userP") UserEntity user) {
 
-        userRepository.updateUser(user.getNickname(), user.getPassword(), user.getId());
+        userRepository.updateUser(user.getNickname(), user.getPassword(), user.getEmail(), user.getId());
         userRepository.flush();
-        return "redirect:/admin/users";
+        return "redirect:admin/users";
     }
 
     // 删除用户
@@ -93,7 +93,21 @@ public class MainController {
         userRepository.delete(userId);
         // 立即刷新
         userRepository.flush();
-        return "redirect:/admin/users";
+        return "redirect:admin/users";
+    }
+
+    // 查看用户详情
+    // @PathVariable可以收集url中的变量，需匹配的变量用{}括起来
+    // 例如：访问 localhost:8080/admin/users/show/1 ，将匹配 id = 1
+    @RequestMapping(value = "/admin/users/show/{id}", method = RequestMethod.GET)
+    public String showUser(@PathVariable("id") Integer userId, ModelMap modelMap) {
+
+        // 找到userId所表示的用户
+        UserEntity userEntity = userRepository.findOne(userId);
+
+        // 传递给请求页面
+        modelMap.addAttribute("user", userEntity);
+        return "/admin/userDetail";
     }
 
 }

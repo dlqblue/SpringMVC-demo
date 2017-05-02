@@ -17,6 +17,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     @Modifying //修改操作
     @Transactional //事务性操作
     //定义查询，@Param注解用于提取参数
-    @Query("update UserEntity us set us.nickname=:qNickname, us.password=:qPassword where us.id=:qId")
-    void updateUser(@Param("qNickname") String nickname, @Param("qPassword") String password, @Param("qId") Integer id);
+    @Query("update UserEntity us set us.nickname=:qNickname, us.password=:qPassword ,us.email=:qEmail where us.id=:qId")
+    void updateUser(@Param("qNickname") String nickname, @Param("qPassword") String password, @Param("qEmail") String email, @Param("qId") Integer id);
 }

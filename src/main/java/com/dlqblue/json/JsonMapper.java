@@ -3,6 +3,7 @@ package com.dlqblue.json;
 /**
  * Created by Administrator on 2017/2/28.
  */
+
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -21,7 +22,6 @@ import java.util.Map;
 /**
  * 简单封装Jackson，实现JSON String<->Java Object的Mapper.
  * 封装不同的输出风格, 使用不同的builder函数创建实例.
- * @author linjiayu
  *
  */
 public class JsonMapper {
@@ -63,6 +63,7 @@ public class JsonMapper {
     public static JsonMapper nonDefaultMapper() {
         return new JsonMapper(Include.NON_DEFAULT);
     }
+
     /**
      * Object可以是POJO，也可以是Collection或数组。
      * 如果对象为Null, 返回"null".
@@ -77,12 +78,13 @@ public class JsonMapper {
             return null;
         }
     }
+
     /**
      * 反序列化POJO或简单Collection如List<String>.
-     *
+     * <p>
      * 如果JSON字符串为Null或"null"字符串, 返回Null.
      * 如果JSON字符串为"[]", 返回空集合.
-     *
+     * <p>
      * 如需反序列化复杂Collection如List<MyBean>, 请使用fromJson(String, JavaType)
      *
      * @see #fromJson(String, JavaType)
@@ -115,6 +117,7 @@ public class JsonMapper {
             return null;
         }
     }
+
     /**
      * 构造Collection类型.
      */
@@ -163,7 +166,7 @@ public class JsonMapper {
      * 支持使用Jaxb的Annotation，使得POJO上的annotation不用与Jackson耦合。
      * 默认会先查找jaxb的annotation，如果找不到再找jackson的。
      */
-	/*public void enableJaxbAnnotation() {
+    /*public void enableJaxbAnnotation() {
 		JaxbAnnotationModule module = new JaxbAnnotationModule();
 		mapper.registerModule(module);
 	}*/
