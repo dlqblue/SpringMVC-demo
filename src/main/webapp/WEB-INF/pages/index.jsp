@@ -16,7 +16,12 @@
     <title>SpringMVC Demo 首页</title>
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/form-elements.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,17 +31,85 @@
     <![endif]-->
 </head>
 <body>
-<h1>这里是SpringMVC Demo首页</h1>
+<div class="top-content">
 
-<h3>出现此页面，说明配置成功。</h3>
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1><strong>Big News</strong> 后台管理中心</h1>
+                    <div class="description">
+                        <p>
+                            搞个大新闻！报道绝无偏差！作者新浪微博 <a href="http://weibo.com/dlqblue"><strong>键盘摄影师_le</strong></a>, 欢迎互粉~
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <h3>登录页面</h3>
+                            <p>输入你的用户名和密码</p>
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-key"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom">
+                        <form role="form" action="" method="post" class="login-form">
+                            <div class="form-group">
+                                <label class="sr-only" for="form-username">用户名</label>
+                                <input type="text" name="form-username" placeholder="请输入用户名"
+                                       class="form-username form-control" id="form-username">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-password">密码</label>
+                                <input type="password" name="form-password" placeholder="请输入密码"
+                                       class="form-password form-control" id="form-password">
+                            </div>
+                            <button type="submit" class="btn">Sign in!</button>
+                            <a href="admin/users" type="button" class="btn btn-sm btn-success">用户管理</a>
+                            <a href="admin/news" type="button" class="btn btn-sm btn-success">新闻管理</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<a href="admin/users" type="button" class="btn btn-sm btn-success">用户管理</a>
-<a href="admin/news" type="button" class="btn btn-sm btn-success">新闻管理</a>
+<script type="text/javascript">
+    $(function () {
+        var $btn = $(".btn");
+        var $username = $("#username");
+        var $password = $("#password");
+        $btn.on(
+            "click", function () {
+                $.ajax({
+                    url: "",
+                    data: "$username+$password",
+                    dataType: "jason",
+                    type: "post",
+                    success: function () {
+                        if (data == Fail) {
+                            alert("登陆失败！请重新输入")
+                        } else {
+                            alert("登陆成功！")
+                        }
+                    }
+                })
+            })
+    })
+</script>
+
 
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="/js/jquery.backstretch.min.js"></script>
+<script src="/js/scripts.js"></script>
 </body>
 </html>
