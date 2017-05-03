@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -57,20 +58,18 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <form role="form" action="" method="post" class="login-form">
+                        <form role="form" class="login-form">
                             <div class="form-group">
-                                <label class="sr-only" for="form-username">用户名</label>
-                                <input type="text" name="form-username" placeholder="请输入用户名"
-                                       class="form-username form-control" id="form-username">
+                                <label class="sr-only" for="username">用户名</label>
+                                <input type="text" name="nickname" placeholder="请输入用户名"
+                                       class="form-username form-control" id="username">
                             </div>
                             <div class="form-group">
-                                <label class="sr-only" for="form-password">密码</label>
-                                <input type="password" name="form-password" placeholder="请输入密码"
-                                       class="form-password form-control" id="form-password">
+                                <label class="sr-only" for="password">密码</label>
+                                <input type="password" name="password" placeholder="请输入密码"
+                                       class="form-password form-control" id="password">
                             </div>
-                            <button type="submit" class="btn">Sign in!</button>
-                            <a href="admin/users" type="button" class="btn btn-sm btn-success">用户管理</a>
-                            <a href="admin/news" type="button" class="btn btn-sm btn-success">新闻管理</a>
+                            <button type="submit" class="btn btn-sm btn-success" onclick="login()">登陆！</button>
                         </form>
                     </div>
                 </div>
@@ -79,37 +78,24 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    $(function () {
-        var $btn = $(".btn");
-        var $username = $("#username");
-        var $password = $("#password");
-        $btn.on(
-            "click", function () {
-                $.ajax({
-                    url: "",
-                    data: "$username+$password",
-                    dataType: "jason",
-                    type: "post",
-                    success: function () {
-                        if (data == Fail) {
-                            alert("登陆失败！请重新输入")
-                        } else {
-                            alert("登陆成功！")
-                        }
-                    }
-                })
-            })
-    })
-</script>
-
-
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="/js/jquery.backstretch.min.js"></script>
-<script src="/js/scripts.js"></script>
+<script src="/js/login.js"></script>
+<script>
+
+    jQuery(document).ready(function() {
+
+        /*
+         Fullscreen background
+         */
+        $.backstretch("/img/backgrounds/1.jpg");
+
+    })
+
+</script>
 </body>
 </html>
