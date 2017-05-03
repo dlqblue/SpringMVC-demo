@@ -84,7 +84,6 @@
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="/js/jquery.backstretch.min.js"></script>
-<script src="/js/login.js"></script>
 <script>
 
     jQuery(document).ready(function() {
@@ -94,8 +93,51 @@
          */
         $.backstretch("/img/backgrounds/1.jpg");
 
-    })
+    });
+
+    function login(){
+        var username = $("#username").val();
+        var pwd =$("#password").val();
+        if(username==""||username==null){
+            alert("账号不能为空");
+            return false;
+        }
+        if(pwd==""||pwd==null){
+            alert("密码不能为空");
+            return false;
+        }
+
+        $.ajax({
+            url:"/admin/login.do",
+            type:"POST",
+            dataType:"json",
+            async: false,
+            data:{
+                username:username,
+                password:pwd
+            },
+            success:function(data){
+
+                console.log(data);
+                var status = data.msg;
+                if (status == "成功") {
+                    window.location.href = "admin/news";
+                } else if (status == "成功管理员"){
+                    window.location.href = "admin/users";
+                } else {
+                    alert("用户名或者密码错误");
+                }
+
+            }
+            // error:function(data){
+            //     alert("请求失败，网络异常");
+            //     console.log(data);
+            // }
+        });
+
+    }
 
 </script>
+
 </body>
 </html>

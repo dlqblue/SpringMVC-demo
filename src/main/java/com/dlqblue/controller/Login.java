@@ -54,7 +54,7 @@ public class Login {
 //        return json;
 //    }
 
-    @RequestMapping(value="/admin/login.do", method = RequestMethod.GET)
+    @RequestMapping(value="/admin/login.do", method = RequestMethod.POST)
     public @ResponseBody Map<String,Object> login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
