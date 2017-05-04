@@ -28,6 +28,11 @@ public class MainController {
         return "index";
     }
 
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public String login() {
+//        return "index";
+//    }
+
     @RequestMapping(value = "/admin/users", method = RequestMethod.GET)
     public String getUsers(ModelMap modelMap) {
 

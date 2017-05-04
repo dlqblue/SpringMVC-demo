@@ -107,33 +107,56 @@
             return false;
         }
 
-        $.ajax({
-            url:"/admin/login.do",
-            type:"POST",
-            dataType:"json",
-            async: false,
-            data:{
-                username:username,
-                password:pwd
-            },
-            success:function(data){
+        $.post("/admin/login.do", {
+            username:username,
+            password:pwd
+        }, function(data){
 
-                console.log(data);
-                var status = data.msg;
-                if (status == "成功") {
-                    window.location.href = "admin/news";
-                } else if (status == "成功管理员"){
-                    window.location.href = "admin/users";
-                } else {
-                    alert("用户名或者密码错误");
-                }
-
+            console.log(data);
+            console.log(data.msg);
+            var status = data.msg;
+            if (status == "success") {
+                window.location.href = "admin/news";
+//                    setTimeout(window.location.href = "admin/news",5);
+            } else if (status == "successAdmin"){
+                location.href = "http://www.baidu.com";
+            } else {
+                alert("用户名或者密码错误");
             }
-            // error:function(data){
-            //     alert("请求失败，网络异常");
-            //     console.log(data);
-            // }
-        });
+
+        },"json");
+
+//        $.ajax({
+//            url:"/admin/login.do",
+////            type:"json",
+//            type:"POST",
+//            dataType:"json",
+//            contentType:"application/json;charset=UTF-8",
+//            async: false,
+//            data:{
+//                username:username,
+//                password:pwd
+//            },
+//            success:function(data){
+//
+//                console.log(data);
+//                console.log(data.msg);
+//                var status = data.msg;
+//                if (status == "success") {
+//                    window.location.href = "admin/news";
+////                    setTimeout(window.location.href = "admin/news",5);
+//                } else if (status == "successAdmin"){
+//                    location.href = "http://www.baidu.com";
+//                } else {
+//                    alert("用户名或者密码错误");
+//                }
+//
+//            }
+//            // error:function(data){
+//            //     alert("请求失败，网络异常");
+//            //     console.log(data);
+//            // }
+//        });
 
     }
 

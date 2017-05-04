@@ -1,5 +1,6 @@
 package com.dlqblue.controller;
 
+import com.dlqblue.json.JsonMapper;
 import com.dlqblue.model.UserEntity;
 import com.dlqblue.repository.UserRepository;
 import org.json.JSONObject;
@@ -55,7 +56,7 @@ public class Login {
 //    }
 
     @RequestMapping(value="/admin/login.do", method = RequestMethod.POST)
-    public @ResponseBody Map<String,Object> login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public @ResponseBody String login(HttpServletRequest request) throws IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         Map<String,Object> map = new HashMap<String,Object>();
@@ -64,18 +65,18 @@ public class Login {
             if (userEntity.getNickname().equals(username) && userEntity.getPassword().equals(password)) {
                 map.put("username",username);
                 map.put("pwd",password);
-                map.put("msg", "成功");
+                map.put("msg", "success");
                 break;
             } else if (username.equals("admin") && password.equals("admin")) {
                 map.put("username",username);
                 map.put("pwd",password);
-                map.put("msg", "成功管理员");
+                map.put("msg", "successAdmin");
                 break;
             } else {
-                map.put("msg", "失败");
+                map.put("msg", "false");
             }
         }
-        return map;
+        return JsonMapper.nonDefaultMapper().toJson(map);
     }
 
 //    @RequestMapping(value= "/admin/login.do", method = RequestMethod.POST)
