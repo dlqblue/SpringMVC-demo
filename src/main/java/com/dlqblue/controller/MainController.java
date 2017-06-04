@@ -57,15 +57,12 @@ public class MainController {
     @RequestMapping(value = "/admin/users/addP", method = RequestMethod.POST)
     public String addUserPost(@ModelAttribute("user") UserEntity userEntity) {
         //post请求传递过来的是一个UserEntity对象，里面包含了该用户的信息
-        //通过@ModelAttribut()注解可以获取传递过来的'user'，并创建这个对象
+        //@ModelAttribut()获取传递过来的'user'，并创建这个对象
 
-        //向数据库中添加一个用户，暂时不会刷新缓存
-        //userRepository.save(userEntity);
-
-        //这个会刷新缓存
+        //刷新缓存
         userRepository.saveAndFlush(userEntity);
 
-        //重定向到用户管理界面，方法为 redirect:url
+        //重定向
         return "redirect:/admin/users";
     }
 

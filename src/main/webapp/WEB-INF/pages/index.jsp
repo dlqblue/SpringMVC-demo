@@ -69,7 +69,7 @@
                                 <input type="password" name="password" placeholder="请输入密码"
                                        class="form-password form-control" id="password">
                             </div>
-                            <button type="submit" class="btn btn-sm btn-success" onclick="login()">登陆！</button>
+                            <button type="button" class="btn btn-sm btn-success" id="login">登陆！</button>
                         </form>
                     </div>
                 </div>
@@ -95,6 +95,8 @@
 
     });
 
+    $("#login").click(login);
+
     function login(){
         var username = $("#username").val();
         var pwd =$("#password").val();
@@ -107,56 +109,33 @@
             return false;
         }
 
-        $.post("/admin/login.do", {
-            username:username,
-            password:pwd
-        }, function(data){
+        $.ajax({
+            url:"/admin/login.do",
+            type:"POST",
+            contentType:"application/json",
+            dataType:"json",
+            data:JSON.stringify({
+                username:username,
+                password:pwd
+            }),
+            success:function(data){
 
-            console.log(data);
-            console.log(data.msg);
-            var status = data.msg;
-            if (status == "success") {
-                window.location.href = "admin/news";
-//                    setTimeout(window.location.href = "admin/news",5);
-            } else if (status == "successAdmin"){
-                location.href = "http://www.baidu.com";
-            } else {
-                alert("用户名或者密码错误");
+                var status = data.msg;
+                if (status == "success") {
+                    sessionStorage.setItem("user","common");
+                    window.location.href = "admin/news";
+                } else if (status == "successAdmin"){
+                    sessionStorage.setItem("user","admin");
+                    window.location.href = "admin/users";
+                } else {
+                    alert("用户名或者密码错误");
+                }
+
+            },
+            error:function(data){
+                alert("请求失败，网络异常");
             }
-
-        },"json");
-
-//        $.ajax({
-//            url:"/admin/login.do",
-////            type:"json",
-//            type:"POST",
-//            dataType:"json",
-//            contentType:"application/json;charset=UTF-8",
-//            async: false,
-//            data:{
-//                username:username,
-//                password:pwd
-//            },
-//            success:function(data){
-//
-//                console.log(data);
-//                console.log(data.msg);
-//                var status = data.msg;
-//                if (status == "success") {
-//                    window.location.href = "admin/news";
-////                    setTimeout(window.location.href = "admin/news",5);
-//                } else if (status == "successAdmin"){
-//                    location.href = "http://www.baidu.com";
-//                } else {
-//                    alert("用户名或者密码错误");
-//                }
-//
-//            }
-//            // error:function(data){
-//            //     alert("请求失败，网络异常");
-//            //     console.log(data);
-//            // }
-//        });
+        });
 
     }
 

@@ -26,66 +26,26 @@ public class Login {
     @Autowired
     UserRepository userRepository;
 
-    /**
-     * @param nickname 用户名，一定要对应着表单的name才行
-     * @param password 用户密码，也应该对应表单的数据项
-     * @param model    一个域对象，可用于存储数据值
-     * @return
-     * @RequestParam注解的作用是：根据参数名从URL中取得参数值
-     */
-//    @RequestMapping(value = "admin/login", method = RequestMethod.POST) // @RequestMapping 注解可以用指定的URL路径访问本控制层
-//    public String login(@RequestParam("nickname") String nickname, @RequestParam("password") String password,
-//                        Model model) {
-//
-//        List<UserEntity> userEntityList = userRepository.findAll();
-//
-//        return "redirect:users";
-//
-//    }
-//    public JSONObject login(HttpSession session, ) {
-//
-////        Member member = memberService.findByMid(mid);
-//
-//        if (member != null && member.getPassword().equals(json.getString("password"))) {
-//            session.setAttribute("mid", mid);
-//            json.put("result", "success");
-//            return json;
-//        }
-//
-//        return json;
-//    }
-
-    @RequestMapping(value="/admin/login.do", method = RequestMethod.POST)
-    public @ResponseBody String login(HttpServletRequest request) throws IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        Map<String,Object> map = new HashMap<String,Object>();
-        List<UserEntity> userEntityList = userRepository.findAll();
-        for (UserEntity userEntity : userEntityList) {
-            if (userEntity.getNickname().equals(username) && userEntity.getPassword().equals(password)) {
-                map.put("username",username);
-                map.put("pwd",password);
-                map.put("msg", "success");
-                break;
-            } else if (username.equals("admin") && password.equals("admin")) {
-                map.put("username",username);
-                map.put("pwd",password);
-                map.put("msg", "successAdmin");
-                break;
-            } else {
-                map.put("msg", "false");
-            }
+    @RequestMapping(value= "/admin/login.do", method = RequestMethod.POST)
+    @ResponseBody
+    public String login (@RequestBody Map map) {
+        String username = map.get("username").toString();
+        String password = map.get("password").toString();
+        UserEntity userEntity = userRepository.findByNickname(username);
+        Map<String,Object> hashMap = new HashMap<>();
+        if (userEntity != null) {
+            if (userEntity.getNickname().equals(username) && userEntity.getPassword().equals(password))
+            hashMap.put("username",username);
+            hashMap.put("pwd",password);
+            hashMap.put("msg", "success");
+        } else if (username.equals("admin") && password.equals("admin")) {
+            hashMap.put("username",username);
+            hashMap.put("pwd",password);
+            hashMap.put("msg", "successAdmin");
+        } else {
+            hashMap.put("msg", "false");
         }
-        return JsonMapper.nonDefaultMapper().toJson(map);
+        return JsonMapper.nonDefaultMapper().toJson(hashMap);
     }
-
-//    @RequestMapping(value= "/admin/login.do", method = RequestMethod.POST)
-//    @ResponseBody
-//    public String toSearch(@RequestBody JSONObject json, Model model) {
-//        String username = json.getString("username");
-//        String password = json.getString("password");
-//        List<UserEntity> userEntityList = userRepository.findAll();
-
-//    }
 
 }

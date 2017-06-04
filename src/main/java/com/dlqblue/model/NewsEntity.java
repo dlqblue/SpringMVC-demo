@@ -38,7 +38,7 @@ public class NewsEntity {
     }
 
     @Basic
-    @Column(name = "content", nullable = true, length = 255)
+    @Column(name = "content", nullable = true)
     public String getContent() {
         return content;
     }

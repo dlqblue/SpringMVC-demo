@@ -33,6 +33,7 @@
 
     <h3>所有用户 <a href="/admin/users/add" type="button" class="btn btn-primary btn-sm">添加</a>
                 <a href="/admin/news" type="button" class="btn btn-primary  btn-sm btn-success">新闻管理</a>
+                <a id="cancelBtn" type="button" class="btn btn-primary btn-sm btn-danger">注销当前用户</a>
     </h3>
 
     <!-- 如果用户列表为空 -->
@@ -75,5 +76,16 @@
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script>
+
+    $("#cancelBtn").click(cancel);
+    function cancel() {
+        sessionStorage.removeItem("user");
+        window.location.href = "/";
+    }
+
+</script>
+
 </body>
 </html>

@@ -19,10 +19,14 @@
     <title>编辑新闻</title>
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="http://mindmup.s3.amazonaws.com/lib/img/favicon.ico" >
+    <%--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">--%>
+    <%--<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">--%>
     <link rel="stylesheet" type="text/css" href="/css/prettify.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-wysihtml5.css">
+    <link rel="stylesheet" type="text/css" href="/css/addNews.css">
+    <%--<link rel="shortcut icon" href="http://mindmup.s3.amazonaws.com/lib/img/favicon.ico" >--%>
+    <%--<link rel="stylesheet" type="text/css" href="/css/wysiwyg-color.css">--%>
+
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet" type="text/css">
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -61,7 +65,7 @@
             <label for="content">内容：</label>
             <%--<textarea class="form-control" id="content" name="content" rows="3"--%>
                       <%--placeholder="Please Input Content"></textarea>--%>
-            <textarea class="form-control" id="content" name="content" placeholder="请输入内容：" rows="10">${news.content}</textarea>
+            <textarea class="form-control" id="content" name="content" placeholder="请输入内容：" style="height: 500px">${news.content}</textarea>
         </div>
         <div class="form-group">
             <label for="pushDate">日期：</label>
@@ -87,7 +91,22 @@
 <script src="/js/bootstrap-wysihtml5.js"></script>
 
 <script>
-    $('#content').wysihtml5();
+    //    $('#content').wysihtml5();
+
+    $('#content').wysihtml5({
+        "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+        "emphasis": true, //Italics, bold, etc. Default true
+        "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+        "html": false, //Button which allows you to edit the generated HTML. Default false
+        "link": true, //Button to insert a link. Default true
+        "image": true, //Button to insert an image. Default true,
+        "color": true //Button to change color of font
+    });
+
+</script>
+
+<script type="text/javascript" charset="utf-8">
+    $(prettyPrint);
 </script>
 </body>
 </html>

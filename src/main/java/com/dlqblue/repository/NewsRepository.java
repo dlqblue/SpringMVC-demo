@@ -14,7 +14,7 @@ import java.sql.Date;
  */
 public interface NewsRepository extends JpaRepository<NewsEntity, Integer> {
 
-    //修改博文操作
+    //修改操作
     @Modifying
     @Transactional
     @Query("update NewsEntity news set news.title=:qTitle, news.userByUserId.id=:qUserId," +

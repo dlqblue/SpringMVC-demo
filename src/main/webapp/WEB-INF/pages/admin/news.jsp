@@ -33,7 +33,8 @@
     <hr/>
 
     <h3>所有新闻 <a href="/admin/news/add" type="button" class="btn btn-primary btn-sm">添加</a>
-                <a href="/admin/users" id="userbtn" type="button" class="btn btn-primary  btn-sm btn-warning" style="display: none">用户管理</a>
+                <a href="/admin/users" id="userbtn" type="button" class="btn btn-primary btn-sm btn-warning" style="display: none">用户管理</a>
+                <a id="cancelBtn" type="button" class="btn btn-primary btn-sm btn-danger">注销当前用户</a>
     </h3>
 
     <!-- 如果用户列表为空 -->
@@ -63,7 +64,7 @@
                     <td>
                         <a href="/admin/news/show/${news.id}" type="button" class="btn btn-sm btn-success">详情</a>
                         <a href="/admin/news/update/${news.id}" type="button" class="btn btn-sm btn-warning">修改</a>
-                        <a href="/admin/news/delete/${news.id}" type="button" class="btn btn-sm btn-danger">删除</a>
+                        <a href="/admin/news/delete/${news.id}" id="delete" style="display: none" type="button" class="deleteBtn btn btn-sm btn-danger">删除</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -78,18 +79,27 @@
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 <script>
+
     $(function () {
-        var name = GetQueryString("username");
-        if (name == "admin") {
+        var user = sessionStorage.getItem("user");
+        if (user == "admin") {
             $("#userbtn").show();
         }
     });
 
-    function GetQueryString(name)
-    {
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        if(r!=null)return  unescape(r[2]); return null;
+    function ifAdmin() {
+        var user = sessionStorage.getItem("user");
+        if (user == "admin") {
+            $(".deleteBtn").show();
+        }
+    }
+
+    $("#cancelBtn").click(cancel);
+    $("#delete").load(ifAdmin());
+
+    function cancel() {
+        sessionStorage.removeItem("user");
+        window.location.href = "/";
     }
 
 </script>
